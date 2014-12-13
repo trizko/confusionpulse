@@ -94,3 +94,12 @@ html, body {
 #studentCounter {
   position: absolute;
 }
+
+.emphasize {
+  font-weight: bold;
+  color: red;
+}
+
+.result {
+  font-size: 3em;
+}
