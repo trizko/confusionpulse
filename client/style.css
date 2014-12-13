@@ -15,7 +15,7 @@
   background-image: linear-gradient(top, #999, #a73f2d 80% );
   background-color:#a73f2d;
   border:5px solid #333;
-  border-radius:120px;  
+  border-radius:120px;
   display:inline-block;
   cursor:pointer;
   color:#ffffff;
@@ -101,5 +101,5 @@ html, body {
 }
 
 .result {
-  font-size: 3em;
+  font-size: 1.5em;
 }

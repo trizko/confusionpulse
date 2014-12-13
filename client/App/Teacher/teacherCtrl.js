@@ -71,6 +71,7 @@ angular
           confusedSpeechIntoString.push(subArray[j]);
         }
       }
-      jQuery('.result').append('<div>' + confusedSpeechIntoString.join(' ') + '</div>'); 
+      jQuery('.remove').remove();
+      jQuery('.result').append('<div class="remove">' + confusedSpeechIntoString.join(' ') + '</div>');
     }
   }])
