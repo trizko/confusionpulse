@@ -15,7 +15,7 @@ angular
     $scope.threshold = false;
     $scope.transcribedText = '';
 
-    var thresholdTimestamp;
+    var thresholdTimestamp = [];
     var confusingSpeech = [];
 
     var socket = io();
@@ -26,7 +26,8 @@ angular
     });
 
     socket.on('teacher:threshold', function (data) {
-      thresholdTimestamp = data;
+      console.log(data);
+      thresholdTimestamp.push(data.time);
 
       $scope.threshold = true;
       $scope.$apply();
@@ -47,12 +48,19 @@ angular
     $scope.stop = function(){
       TeacherFactory.recognition.stop();
       for(var timestamp in TeacherFactory.speechResults){
-        var difference = new Date(thresholdTimestamp) - new Date(timestamp);
-        if(difference < 5000 && difference > -1000){
+        var isInThreshold = false;
+        for(var i =0; i < thresholdTimestamp.length; i++){
+          var difference = new Date(thresholdTimestamp[i]) - new Date(timestamp);
+          console.log('DIFF:',difference);
+          if(difference < 5000 && difference > -1000){
+            isInThreshold = true;
+          }
+        }
+        if(isInThreshold){
           confusingSpeech.push(['<span class="emphasize">']);
         }
         confusingSpeech.push(TeacherFactory.speechResults[timestamp]);
-        if(difference < 5000 && difference > -1000){
+        if(isInThreshold){
           confusingSpeech.push(['</span>']);
         }
       }
@@ -63,6 +71,6 @@ angular
           confusedSpeechIntoString.push(subArray[j]);
         }
       }
-      $scope.transcribedText = confusedSpeechIntoString.join(' ');
+      jQuery('.result').append('<div>' + confusedSpeechIntoString.join(' ') + '</div>'); 
     }
   }])

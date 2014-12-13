@@ -2,7 +2,7 @@ var socket = io();
 
 var segments = 30, //
   interval = 1000, //millesecond delay
-  totalStudents = 60,
+  totalStudents = 10,
   threshold = .10,
   now = new Date(Date.now()),
   confusionCollection = [];
