@@ -8,6 +8,8 @@
   - __Scrum Master__: Thomas Klonecke
   - __Development Team Members__: Ashmeet Sidhu, Chase Ellsworth
 
+  - __Legacy Team Members__:Ervin Chow, Tony Rizko, Charlie Depman, Jonathan Arnaldo
+
 ## Table of Contents
 
 1. [Usage](#Usage)
