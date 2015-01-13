@@ -45,7 +45,11 @@ var calculateConfusion = function(array){
     if (array) {
       confusionCollection = array;
     }
-    if (confusionCollection.length){
+    if (confusionCollection.length){      
+    // console.log((confusionCollection.map(function(confusionObj) {
+      //   var elapsed = (new Date()) - (new Date(confusionObj.createdAt));
+      //   return (Math.floor(((elapsed < 3000) ? 1 : (3000/elapsed))*10))/10;
+      // }))
       confused = Math.min(confusionCollection.map(function(confusionObj) {
         var elapsed = (new Date()) - (new Date(confusionObj.createdAt));
         return (elapsed < 3000) ? 1 : (3000/elapsed);
