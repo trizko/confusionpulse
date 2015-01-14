@@ -1,4 +1,6 @@
 <div ng-controller="StudentController">
-	<button id="confused" ng-disabled="clicked" ng-style="clickedStyle" ng-click="confusedStudent()">I'm confused</button>
+	<button id="confused" ng-disabled="clicked" ng-style="clickedStyle" ng-click="confusedStudent()">
+    <a class="butt">{{buttonMessage}}</a>
+  </button>
 </div>
 <div ng-controller="TeacherController"></div>
