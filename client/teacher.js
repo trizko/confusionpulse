@@ -1,11 +1,11 @@
-var segments = 30, // 
+var segments = 30, //
   interval = 1000, //millesecond delay
   totalStudents = 60,
   now = new Date(Date.now()),
   confusionCollection = [];
   confused = 0;
   for (var i = 0, data = []; i < segments; i++) {
-      data[i] = 0 
+      data[i] = 0
   };
 
 var margin = {top: 20, right: 20, bottom: 20, left: 20},
@@ -14,7 +14,7 @@ var margin = {top: 20, right: 20, bottom: 20, left: 20},
 
 var x = d3.time.scale()
   .domain([now - segments * interval, now])
-  .range([0, width]); 
+  .range([0, width]);
 
 var y = d3.scale.linear()
   .domain([0,totalStudents])
@@ -41,11 +41,9 @@ var path = svg.append("g")
     .attr("class","graphline")
     .datum(data);
 
-var calculateConfusion = function(array){
-    if (array) {
-      confusionCollection = array;
-    }
-    if (confusionCollection.length){      
+var calculateConfusion = function(data){
+    confusionCollection.push(data);
+    if (confusionCollection.length){
     // console.log((confusionCollection.map(function(confusionObj) {
       //   var elapsed = (new Date()) - (new Date(confusionObj.createdAt));
       //   return (Math.floor(((elapsed < 3000) ? 1 : (3000/elapsed))*10))/10;
@@ -54,7 +52,7 @@ var calculateConfusion = function(array){
         var elapsed = (new Date()) - (new Date(confusionObj.createdAt));
         return (elapsed < 3000) ? 1 : (3000/elapsed);
       }).reduce(function(a, b) {
-        return a + b; 
+        return a + b;
       }), totalStudents);
     }
 };
