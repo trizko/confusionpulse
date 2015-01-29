@@ -1,6 +1,6 @@
 angular
-  .module('authFactory', [])
-  .factory('authFactory', [ '$state', function($state) {
+  .module('app.AuthFactory', [])
+  .factory('AuthFactory', [ '$state', function($state) {
   	
     var socket = io();
 
@@ -15,9 +15,7 @@ angular
       //emit that a newConnection has been made
       //NOTE: this is not being used, it is intended to allow for a different
       //d3 visualization
-      socket.emit("newConnection", function(){
-        newStudent: "new student joined"
-      })
+      socket.emit("teacher:newUser", {name:name});
 
       //when the studentName is submitted, it will change the view to student
       $state.go("student"); 

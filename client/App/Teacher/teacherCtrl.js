@@ -1,16 +1,18 @@
 angular
-  .module('TeacherController', [])
-  .controller('TeacherController', ['$scope', 'teacherFactory', function($scope, teacherFactory) {
+  .module('app.TeacherController', [])
+  .controller('TeacherController', ['$scope', 'TeacherFactory', function($scope, TeacherFactory) {
 
     $scope.numStudents = 0;
+    $scope.test = 'hello';
+    var socket = io();
 
-    setInterval(function() {
-      $scope.numStudents = teacherFactory.getCount();
+    socket.on("teacher:addUser", function (data) {
+      $scope.numStudents++;
       $scope.$apply();
-    }, 1000);
+    })
 
     //TODO: MAKE BUTTON TO START TRANSCRIPTION USING THIS METHOD
-    teacherFactory.recognition.start();
+    TeacherFactory.recognition.start();
     //TODO: MAKE BUTTON TO STOP TRANSCRIPTION USING THIS METHOD
-    teacherFactory.recognition.stop();
+    TeacherFactory.recognition.stop();
   }])
