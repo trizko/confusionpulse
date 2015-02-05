@@ -34,19 +34,20 @@ io.on('connection', function(socket){
   
   console.log('a user connected');
   //teacher can be notified to new connections. NOT complete
-  io.sockets.emit("teacher:newStudent", {});
   io.emit("event", {it: "works"});
   //listen for students to click button and emit confusion event
-  socket.on('confusion', function(data) {
-  	console.log("COOOONNNFUUUSIIIOOOONNNN!");
-  	console.log(data);
+  socket.on('student:confusion', function(data) {
+  	console.log('CONFUSION DATA', data);
   	//add the incoming student data to the database
     helpers.addVote(data, function(data) {
-  		console.log("DOOR!");
+  		console.log("confusion added:", data);
       //pass the data down to the teacher to be displayed in the graph
       io.sockets.emit('teacher:update', data);
   	});
-  })
+  });
+  socket.on('teacher:newUser', function (newStudent) {
+    io.sockets.emit('teacher:addUser');
+  });
 });
 
 ///////////////////////////    STARTING SERVER    ///////////////////////////

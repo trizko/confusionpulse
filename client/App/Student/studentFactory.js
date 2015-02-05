@@ -1,6 +1,6 @@
 angular
-	  .module('studentFactory', [])
-	  .factory('studentFactory',[ function(){
+	  .module('app.StudentFactory', [])
+	  .factory('StudentFactory',[ function(){
 
 			var socket = io();
 
@@ -12,7 +12,7 @@ angular
 				});
 			
 				socket.on('disconnect', function(){
-					console.log("socket DISconnected");
+					console.log("socket disconnected");
 				});
 
 				socket.on('event', function(data){
@@ -25,13 +25,12 @@ angular
 			//NOTE: "lectureID" is just hard-coded and should be turned into an input in the
 			//same manner as "studentID"
 			function confusedStudent (name){
-				
-				socket.emit("confusion", {
+				socket.emit('student:confusion', {
 					lectureID: "RECURSION",
 					studentID: name
 				}); 
-				console.log("I done got clicked.");
-			}
+				console.log("confusion emitted");
+			};
 
 			return {
 				connect: connect,

@@ -1,11 +1,11 @@
 angular.module('app', [
   'ui.router',
-  'StudentController',
-  'studentFactory',
-  'TeacherController',
-  'teacherFactory',
-  'AuthController', 
-  'authFactory'
+  'app.StudentController',
+  'app.StudentFactory',
+  'app.TeacherController',
+  'app.TeacherFactory',
+  'app.AuthController', 
+  'app.AuthFactory'
 ])
 
 
