@@ -11,8 +11,10 @@ angular
       $scope.$apply();
     })
 
-    //TODO: MAKE BUTTON TO START TRANSCRIPTION USING THIS METHOD
-    TeacherFactory.recognition.start();
-    //TODO: MAKE BUTTON TO STOP TRANSCRIPTION USING THIS METHOD
-    TeacherFactory.recognition.stop();
+    $scope.start = function(){
+      TeacherFactory.recognition.start();
+    }
+    $scope.stop = function(){
+      TeacherFactory.recognition.stop();
+    }
   }])
