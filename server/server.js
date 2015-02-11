@@ -48,6 +48,11 @@ io.on('connection', function(socket){
   socket.on('teacher:newUser', function (newStudent) {
     io.sockets.emit('teacher:addUser');
   });
+  socket.on('threshold', function (timeStamp) {
+    console.log(timeStamp);
+    io.sockets.emit('teacher:threshold', timeStamp);
+    // io.sockets.emit('teacher:addUser');
+  });
 });
 
 ///////////////////////////    STARTING SERVER    ///////////////////////////
