@@ -5,6 +5,10 @@ angular
     $scope.numStudents = 0;
     $scope.test = 'hello';
     $scope.threshold = false;
+    $scope.transcribedText = '';
+
+    var thresholdTimestamp;
+    var confusingSpeech = [];
 
     var socket = io();
 
@@ -14,6 +18,8 @@ angular
     });
 
     socket.on('teacher:threshold', function (data) {
+      thresholdTimestamp = data;
+
       $scope.threshold = true;
       $scope.$apply();
 
@@ -23,10 +29,32 @@ angular
       },3000);
     });
 
+    $scope.testButton = function(){
+      socket.emit('threshold', new Date());
+    };
+
     $scope.start = function(){
       TeacherFactory.recognition.start();
     }
     $scope.stop = function(){
       TeacherFactory.recognition.stop();
+      for(var timestamp in TeacherFactory.speechResults){
+        var difference = new Date(thresholdTimestamp) - new Date(timestamp);
+        if(difference < 5000 && difference > -1000){
+          confusingSpeech.push(['<span class="emphasize">']);
+        }
+        confusingSpeech.push(TeacherFactory.speechResults[timestamp]);
+        if(difference < 5000 && difference > -1000){
+          confusingSpeech.push(['</span>']);
+        }
+      }
+      var confusedSpeechIntoString = [];
+      for(var i = 0; i < confusingSpeech.length; i++) {
+        var subArray = confusingSpeech[i];
+        for (var j = 0; j < subArray.length; j++) {
+          confusedSpeechIntoString.push(subArray[j]);
+        }
+      }
+      $scope.transcribedText = confusedSpeechIntoString.join(' ');
     }
   }])
