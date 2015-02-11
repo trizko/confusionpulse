@@ -55,7 +55,7 @@ var calculateConfusion = function(data){
       }).reduce(function(a, b) {
         return a + b;
       }), totalStudents);
-      if (confused >= 6) {
+      if (confused >= totalStudents * 0.20) {
         console.log('THRESHOLD HIT!');
         socket.emit('threshold', {time: new Date()});
       }

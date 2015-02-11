@@ -50,6 +50,7 @@ io.on('connection', function(socket){
   });
   socket.on('threshold', function (timeStamp) {
     console.log(timeStamp);
+    io.sockets.emit('teacher:threshold', timeStamp);
     // io.sockets.emit('teacher:addUser');
   });
 });
