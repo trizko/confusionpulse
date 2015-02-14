@@ -31,14 +31,14 @@ angular
           var saidWord = event.results[resultsLength][ArrayLength].transcript.split(' ');
           var result = saidWord.slice(lastLength);
           lastLength = saidWord.length;
-          speechResults[(new Date()).toUTCString()] = result;
-          console.log(result);
+          speechResults[new Date()] = result;
         }
       }
       //END OF SPEECH RECOGNITION CODE
 
     return {
-      recognition: recognition
+      recognition: recognition,
+      speechResults: speechResults
     };
 
   }]);

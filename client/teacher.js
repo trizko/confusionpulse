@@ -3,6 +3,7 @@ var socket = io();
 var segments = 30, //
   interval = 1000, //millesecond delay
   totalStudents = 60,
+  threshold = .10,
   now = new Date(Date.now()),
   confusionCollection = [];
   confused = 0;
@@ -49,13 +50,12 @@ var calculateConfusion = function(data){
     }
     if (confusionCollection.length){
       confused = Math.min(confusionCollection.map(function(confusionObj) {
-        console.log(confusionCollection);
         var elapsed = (new Date()) - (new Date(confusionObj.createdAt));
         return (elapsed < 3000) ? 1 : (3000/elapsed);
       }).reduce(function(a, b) {
         return a + b;
       }), totalStudents);
-      if (confused >= totalStudents * 0.20) {
+      if (confused >= totalStudents * threshold) {
         console.log('THRESHOLD HIT!');
         socket.emit('threshold', {time: new Date()});
       }
