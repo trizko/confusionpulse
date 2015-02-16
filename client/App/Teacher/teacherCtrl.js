@@ -2,6 +2,14 @@ angular
   .module('app.TeacherController', [])
   .controller('TeacherController', ['$scope', 'TeacherFactory', function($scope, TeacherFactory) {
 
+    var load_script = function () {
+      var script = document.createElement('script');
+      script.src = 'teacher.js';
+      document.body.appendChild(script);
+    }
+
+    load_script();
+
     $scope.numStudents = 0;
     $scope.test = 'hello';
     $scope.threshold = false;
