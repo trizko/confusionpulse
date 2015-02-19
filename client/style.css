@@ -90,3 +90,7 @@ html, body {
   stroke: red;
   stroke-width: 3px;
 }
+
+#studentCounter {
+  position: absolute;
+}
