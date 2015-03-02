@@ -2,8 +2,8 @@ var socket = io();
 
 var segments = 30, //
   interval = 1000, //millesecond delay
-  totalStudents = 10,
-  threshold = .10,
+  totalStudents = 30,
+  threshold = .15,
   now = new Date(Date.now()),
   confusionCollection = [];
   confused = 0;
